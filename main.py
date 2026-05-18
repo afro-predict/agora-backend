@@ -4,6 +4,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
+from api.routes import markets
 
 app = FastAPI(title="Agora Backend API", description="African Macro Prediction Markets")
 
@@ -15,6 +16,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(markets.router)
+
 MOCK_API_DIR = os.path.join(os.path.dirname(__file__), "mock-api")
 
 def read_mock_json(filename: str):
@@ -24,13 +27,6 @@ def read_mock_json(filename: str):
             return json.load(f)
     raise HTTPException(status_code=404, detail="Mock file not found")
 
-@app.get("/markets")
-async def get_markets(vertical: Optional[str] = None, status: Optional[str] = None, limit: int = 20, offset: int = 0):
-    return read_mock_json("markets.json")
-
-@app.get("/markets/{market_id}")
-async def get_market_detail(market_id: str):
-    return read_mock_json("market-detail.json")
 
 class BetRequest(BaseModel):
     outcome: str

@@ -1,0 +1,21 @@
+-- Vertical 1: Nigerian Macro
+INSERT INTO markets (title, description, vertical, resolution_criteria, source_of_truth, probability_yes, status, closes_at, created_by, total_yes_usdc, total_no_usdc)
+VALUES 
+('Will CBN hold rates above 26.5% at the May MPC?', 'The Central Bank of Nigeria (CBN) Monetary Policy Committee meets to decide on interest rates. Will they maintain or hike the MPR above 26.5%?', 'nigerian_macro', 'Resolution YES if the official CBN MPC communique on May 20, 2026 announces a Monetary Policy Rate (MPR) of 26.5% or higher.', 'https://www.cbn.gov.ng/', 0.73, 'open', '2026-05-20T14:00:00Z', 'system', 12500.00, 4200.00),
+('Will Nigeria CPI exceed 33% in April?', 'Headline inflation in Nigeria has been surging. Will the April CPI reading exceed 33% year-on-year?', 'nigerian_macro', 'Resolution YES if the NBS official April CPI report released in May shows headline inflation > 33.0%.', 'https://nigerianstat.gov.ng/', 0.85, 'open', '2026-05-15T10:00:00Z', 'system', 8400.00, 1200.00),
+('Naira parallel market rate below 1400/$ by June?', 'Will the Nigerian Naira strengthen below 1400 NGN per USD on the parallel market by the end of June 2026?', 'nigerian_macro', 'Resolution YES if AbokiFX or Nairametrics reports a parallel market closing rate < 1400 NGN/USD on June 30, 2026.', 'https://nairametrics.com/', 0.45, 'open', '2026-06-30T16:00:00Z', 'system', 25000.00, 32000.00),
+('Nigeria Q1 GDP Growth > 3.0%?', 'Will Nigeria''s Gross Domestic Product grow by more than 3.0% year-on-year in the first quarter of 2026?', 'nigerian_macro', 'Resolution YES if the NBS Q1 2026 GDP report shows real GDP growth > 3.0%.', 'https://nigerianstat.gov.ng/', 0.55, 'open', '2026-06-20T08:00:00Z', 'system', 4000.00, 3500.00);
+
+-- Vertical 2: African & EM Macro
+INSERT INTO markets (title, description, vertical, resolution_criteria, source_of_truth, probability_yes, status, closes_at, created_by, total_yes_usdc, total_no_usdc)
+VALUES 
+('Will IMF approve Nigeria''s requested program?', 'Will the International Monetary Fund approve a formal financial support program for Nigeria by the end of June?', 'african_macro', 'Resolution YES if the IMF Executive Board formally approves a lending arrangement for Nigeria by June 30, 2026.', 'https://www.imf.org/', 0.35, 'open', '2026-06-30T23:59:59Z', 'system', 10500.00, 19000.00),
+('Ghana CPI below 20% in May?', 'Will Ghana''s headline inflation rate fall below 20% year-on-year in May 2026?', 'african_macro', 'Resolution YES if Ghana Statistical Service reports May 2026 CPI < 20.0%.', 'https://statsghana.gov.gh/', 0.60, 'open', '2026-06-10T10:00:00Z', 'system', 2200.00, 1500.00),
+('South Africa Reserve Bank rate cut in May?', 'Will the SARB cut its repo rate at the May 2026 meeting?', 'african_macro', 'Resolution YES if SARB announces a reduction in the repo rate on May 29, 2026.', 'https://www.resbank.co.za/', 0.25, 'open', '2026-05-29T14:00:00Z', 'system', 5000.00, 15000.00),
+('Kenya Shilling depreciates past 140/USD?', 'Will the Kenyan Shilling officially depreciate past 140 KES per USD by end of June 2026?', 'african_macro', 'Resolution YES if CBK official exchange rate exceeds 140.00 KES/USD on June 30, 2026.', 'https://www.centralbank.go.ke/', 0.40, 'open', '2026-06-30T16:00:00Z', 'system', 7000.00, 9000.00);
+
+-- Vertical 3: Global Macro
+INSERT INTO markets (title, description, vertical, resolution_criteria, source_of_truth, probability_yes, status, closes_at, created_by, total_yes_usdc, total_no_usdc)
+VALUES 
+('Fed rate cut at June FOMC meeting?', 'Will the US Federal Reserve cut the federal funds target rate at the June FOMC meeting?', 'global_macro', 'Resolution YES if FOMC announces a rate cut on June 12, 2026.', 'https://www.federalreserve.gov/', 0.15, 'open', '2026-06-12T18:00:00Z', 'system', 45000.00, 210000.00),
+('IMF downgrades global growth forecast?', 'Will the IMF downgrade its 2026 global growth forecast in the upcoming WEO update?', 'global_macro', 'Resolution YES if the IMF World Economic Outlook update in June 2026 shows a lower global growth rate than the previous report.', 'https://www.imf.org/en/Publications/WEO', 0.70, 'open', '2026-06-25T13:00:00Z', 'system', 18000.00, 7000.00);
