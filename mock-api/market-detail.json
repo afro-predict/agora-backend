@@ -1,0 +1,35 @@
+{
+  "success": true,
+  "data": {
+    "market": {
+      "id": "uuid",
+      "title": "Will CBN hold rates above 26.5% at the May 2026 MPC?",
+      "description": "The CBN Monetary Policy Committee meets May 19-20 2026...",
+      "vertical": "nigerian_macro",
+      "resolution_criteria": "Resolution YES if CBN's official post-MPC communiqué states the MPR is set at or above 26.5%. Resolution NO if MPR is set below 26.5%.",
+      "source_of_truth": "CBN official press release at cbn.gov.ng",
+      "probability_yes": 0.73,
+      "probability_no": 0.27,
+      "status": "open",
+      "closes_at": "2026-05-20T14:00:00Z",
+      "total_yes_usdc": 4200.00,
+      "total_no_usdc": 1580.00
+    },
+    "order_book": {
+      "yes_orders": [
+        { "amount_usdc": 500, "placed_at": "2026-05-17T08:00:00Z" },
+        { "amount_usdc": 250, "placed_at": "2026-05-17T07:30:00Z" }
+      ],
+      "no_orders": [
+        { "amount_usdc": 300, "placed_at": "2026-05-17T09:00:00Z" }
+      ]
+    },
+    "probability_history": [
+      { "probability_yes": 0.68, "timestamp": "2026-05-15T06:00:00Z" },
+      { "probability_yes": 0.71, "timestamp": "2026-05-16T06:00:00Z" },
+      { "probability_yes": 0.73, "timestamp": "2026-05-17T06:00:00Z" }
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-05-17T10:00:00Z"
+}

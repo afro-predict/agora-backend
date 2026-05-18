@@ -1,0 +1,45 @@
+{
+  "success": true,
+  "data": {
+    "market_id": "uuid",
+    "market_title": "Will CBN hold rates above 26.5%?",
+    "probability_yes": 0.73,
+    "confidence": "high",
+    "generated_at": "2026-05-17T06:00:00Z",
+    "rationale": "Based on analysis of the following data points:\n\n1. CBN Governor Cardoso's speech on May 12 signalled continued commitment to monetary tightening...\n2. Nigeria's April CPI came in at 33.69% (NBS, May 15), still far above the CBN's 21.4% target...\n3. Parallel market naira weakened 2.3% in the past week, adding imported inflation pressure...\n4. Of the last 6 MPC meetings, the CBN has held or raised rates 5 times under current governor...\n\nConclusion: High probability (73%) the CBN holds rates. Primary downside risk is unexpected sharp naira appreciation or political pressure from presidency.",
+    "key_factors": [
+      "CPI still 12pp above CBN target",
+      "Governor Cardoso hawkish rhetoric maintained",
+      "Naira parallel rate under renewed pressure"
+    ],
+    "risk_factors": [
+      "Surprise naira appreciation could justify a cut",
+      "Political pressure from presidency ahead of budget season"
+    ],
+    "sources": [
+      {
+        "title": "CBN Governor Speech, May 12 2026",
+        "url": "https://cbn.gov.ng/...",
+        "type": "official"
+      },
+      {
+        "title": "Nigeria CPI April 2026 — NBS Report",
+        "url": "https://nigerianstat.gov.ng/...",
+        "type": "official"
+      },
+      {
+        "title": "Naira weakens at parallel market — Reuters",
+        "url": "https://reuters.com/...",
+        "type": "news"
+      }
+    ],
+    "data_snapshot": {
+      "nigeria_cpi_april": 33.69,
+      "cbn_current_rate": 26.75,
+      "naira_parallel_rate": 1642,
+      "naira_official_rate": 1580
+    }
+  },
+  "error": null,
+  "timestamp": "2026-05-17T10:00:00Z"
+}

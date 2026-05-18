@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "data": {
+    "order_id": "uuid",
+    "market_id": "uuid",
+    "outcome": "yes",
+    "amount_usdc": 50.00,
+    "potential_payout": 68.49,
+    "implied_probability": 0.73,
+    "kelly_suggestion": {
+      "recommended_fraction": 0.08,
+      "recommended_amount_usdc": 40.00,
+      "reasoning": "At 73% implied probability with 37% payout odds, Kelly suggests 8% of bankroll"
+    },
+    "arc_tx_hash": "0x...",
+    "settlement": "pending",
+    "message": "Bet placed. USDC held in escrow on Arc. Resolves May 20."
+  },
+  "error": null,
+  "timestamp": "2026-05-17T10:00:00Z"
+}

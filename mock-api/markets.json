@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "data": {
+    "markets": [
+      {
+        "id": "uuid",
+        "title": "Will CBN hold rates above 26.5% at the May 2026 MPC?",
+        "description": "The CBN Monetary Policy Committee meets May 19-20...",
+        "vertical": "nigerian_macro",
+        "probability_yes": 0.73,
+        "probability_no": 0.27,
+        "total_yes_usdc": 4200.00,
+        "total_no_usdc": 1580.00,
+        "total_volume_usdc": 5780.00,
+        "status": "open",
+        "closes_at": "2026-05-20T14:00:00Z",
+        "hours_remaining": 68,
+        "last_probability_update": "2026-05-17T06:00:00Z"
+      }
+    ],
+    "total": 12,
+    "by_vertical": {
+      "nigerian_macro": 4,
+      "african_macro": 5,
+      "global_macro": 3
+    }
+  },
+  "error": null,
+  "timestamp": "2026-05-17T10:00:00Z"
+}

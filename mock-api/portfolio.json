@@ -1,0 +1,39 @@
+{
+  "success": true,
+  "data": {
+    "wallet_address": "0x...",
+    "summary": {
+      "total_wagered_usdc": 350.00,
+      "total_won_usdc": 420.00,
+      "total_lost_usdc": 200.00,
+      "open_exposure_usdc": 150.00,
+      "net_pnl_usdc": 220.00,
+      "win_rate": 0.62
+    },
+    "open_positions": [
+      {
+        "market_id": "uuid",
+        "market_title": "Will CBN hold rates above 26.5%?",
+        "outcome": "yes",
+        "amount_usdc": 50.00,
+        "current_probability": 0.73,
+        "potential_payout": 68.49,
+        "closes_at": "2026-05-20T14:00:00Z"
+      }
+    ],
+    "resolved_positions": [
+      {
+        "market_id": "uuid",
+        "market_title": "Will Nigeria CPI exceed 33% in April?",
+        "outcome": "yes",
+        "amount_usdc": 100.00,
+        "result": "won",
+        "pnl_usdc": 37.00,
+        "arc_payout_tx": "0x...",
+        "resolved_at": "2026-05-14T10:00:00Z"
+      }
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-05-17T10:00:00Z"
+}
