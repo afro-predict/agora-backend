@@ -8,9 +8,16 @@ class MarketsService:
     def get_all_markets(vertical: Optional[str] = None, status: Optional[str] = None, limit: int = 20, offset: int = 0) -> Dict[str, Any]:
         query = supabase.table("markets").select("*")
         
+        now = datetime.now(timezone.utc)
+        
         if vertical:
             query = query.eq("vertical", vertical)
-        if status:
+            
+        if status == "open":
+            query = query.eq("status", "open").gt("closes_at", now.isoformat())
+        elif status == "closed":
+            query = query.or_(f"status.eq.closed,closes_at.lte.{now.isoformat()}")
+        elif status:
             query = query.eq("status", status)
             
         response = query.order("closes_at").range(offset, offset + limit - 1).execute()
@@ -26,8 +33,9 @@ class MarketsService:
             by_vertical[v] = by_vertical.get(v, 0) + 1
             
         formatted_markets = []
-        now = datetime.now(timezone.utc)
         for m in markets:
+            is_expired = m.closes_at <= now
+            display_status = "closed" if (m.status == "open" and is_expired) else m.status
             hours_remaining = max(0, int((m.closes_at - now).total_seconds() / 3600))
             formatted_markets.append({
                 "id": m.id,
@@ -39,7 +47,7 @@ class MarketsService:
                 "total_yes_usdc": m.total_yes_usdc,
                 "total_no_usdc": m.total_no_usdc,
                 "total_volume_usdc": m.total_volume_usdc,
-                "status": m.status,
+                "status": display_status,
                 "closes_at": m.closes_at.isoformat(),
                 "hours_remaining": hours_remaining,
                 "last_probability_update": m.probability_updated_at.isoformat() if m.probability_updated_at else m.created_at.isoformat()
@@ -79,6 +87,9 @@ class MarketsService:
                 "timestamp": r["generated_at"]
             })
             
+        is_expired = market.closes_at <= datetime.now(timezone.utc)
+        display_status = "closed" if (market.status == "open" and is_expired) else market.status
+
         return {
             "market": {
                 "id": market.id,
@@ -89,7 +100,7 @@ class MarketsService:
                 "source_of_truth": market.source_of_truth,
                 "probability_yes": market.probability_yes,
                 "probability_no": market.probability_no,
-                "status": market.status,
+                "status": display_status,
                 "closes_at": market.closes_at.isoformat(),
                 "total_yes_usdc": market.total_yes_usdc,
                 "total_no_usdc": market.total_no_usdc
