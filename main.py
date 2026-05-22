@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
-from api.routes import markets
+from api.routes import markets, admin
 from scheduler.cron import start_scheduler, shutdown_scheduler
 
 app = FastAPI(title="Agora Backend API", description="African Macro Prediction Markets")
@@ -18,6 +18,7 @@ app.add_middleware(
 )
 
 app.include_router(markets.router)
+app.include_router(admin.router)
 
 @app.on_event("startup")
 async def startup_event():
