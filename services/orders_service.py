@@ -2,6 +2,7 @@ import uuid
 from datetime import datetime, timezone
 from typing import Dict, Any
 from db.supabase_client import supabase
+from agents.kelly_agent import get_kelly_suggestion
 
 class OrdersService:
     @staticmethod
@@ -30,6 +31,11 @@ class OrdersService:
             implied_prob = 0.01
             
         potential_payout = round(amount_usdc / implied_prob, 2)
+        
+        # Simulate a slight edge for the "true probability" vs the market implied probability
+        # so that Claude has interesting data to analyze for Kelly
+        true_prob = min(implied_prob + 0.03, 0.99)
+        kelly_data = get_kelly_suggestion(true_prob, implied_prob, amount_usdc)
         
         # 4. Generate IDs and Timestamps
         order_id = str(uuid.uuid4())
@@ -87,11 +93,7 @@ class OrdersService:
             "amount_usdc": amount_usdc,
             "potential_payout": potential_payout,
             "implied_probability": implied_prob,
-            "kelly_suggestion": {
-                "recommended_fraction": 0.05,
-                "recommended_amount_usdc": round(amount_usdc * 0.8, 2),
-                "reasoning": "Mocked for Day 4. Agent 3 implementation pending."
-            },
+            "kelly_suggestion": kelly_data,
             "arc_tx_hash": f"0x_mock_tx_{order_id[:8]}",
             "settlement": "pending",
             "message": "Bet placed successfully. USDC held in escrow on Arc."
