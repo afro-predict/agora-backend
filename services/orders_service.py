@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 from typing import Dict, Any
 from db.supabase_client import supabase
 from agents.kelly_agent import get_kelly_suggestion
+from services.circle_service import CircleService
 
 class OrdersService:
     @staticmethod
@@ -85,6 +86,9 @@ class OrdersService:
                 "updated_at": timestamp
             }).execute()
             
+        # Trigger Circle Escrow
+        arc_tx_hash = CircleService.escrow_bet(wallet_address, amount_usdc)
+        
         # 8. Return formatted data
         return {
             "order_id": order_id,
@@ -94,7 +98,7 @@ class OrdersService:
             "potential_payout": potential_payout,
             "implied_probability": implied_prob,
             "kelly_suggestion": kelly_data,
-            "arc_tx_hash": f"0x_mock_tx_{order_id[:8]}",
+            "arc_tx_hash": arc_tx_hash,
             "settlement": "pending",
             "message": "Bet placed successfully. USDC held in escrow on Arc."
         }

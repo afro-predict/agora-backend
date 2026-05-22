@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 from utils.news_fetcher import get_latest_macro_news
 from integrations.ai_client import get_claude_json_completion
 from db.supabase_client import supabase
+from services.circle_service import CircleService
 
 SYSTEM_PROMPT = """You are the Chief Resolution Officer (Agent 4) for Agora, a prediction market.
 Your strict duty is to determine the final outcome of expired prediction markets based ONLY on provided news.
@@ -84,6 +85,16 @@ def run_market_resolution():
             }).execute()
             
             print(f"Agent 4: Successfully resolved market {market['id']}.")
+            
+            # 5. Execute Payouts via Circle
+            if outcome in ["yes", "no"]:
+                print(f"Agent 4: Executing Circle payouts for winning '{outcome}' positions...")
+                positions_resp = supabase.table("positions").select("*").eq("market_id", market["id"]).eq("outcome", outcome).execute()
+                
+                for pos in positions_resp.data:
+                    payout_tx = CircleService.payout_winnings(pos["wallet_address"], pos["potential_payout"])
+                    print(f"Agent 4: Paid {pos['potential_payout']} USDC to {pos['wallet_address']}. Tx: {payout_tx}")
+            
         except Exception as e:
             print(f"Agent 4: Error updating database for {market['id']}: {e}")
             
