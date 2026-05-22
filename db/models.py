@@ -27,3 +27,23 @@ class Market(BaseModel):
     @property
     def probability_no(self) -> float:
         return 1.0 - self.probability_yes
+
+class Order(BaseModel):
+    id: str
+    market_id: str
+    wallet_address: str
+    outcome: str
+    amount_usdc: float
+    potential_payout: float
+    implied_probability: float
+    created_at: datetime
+    
+class Position(BaseModel):
+    id: str
+    wallet_address: str
+    market_id: str
+    outcome: str
+    amount_usdc: float
+    potential_payout: float
+    created_at: datetime
+    updated_at: datetime
