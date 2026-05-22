@@ -1,7 +1,7 @@
 import os
 import uuid
 import time
-import requests
+import httpx
 from typing import Dict, Any
 
 CIRCLE_API_KEY = os.environ.get("CIRCLE_API_KEY")
@@ -38,7 +38,7 @@ class CircleService:
         }
         
         try:
-            response = requests.post(f"{CIRCLE_API_BASE_URL}/developer/wallets", headers=headers, json=payload)
+            response = httpx.post(f"{CIRCLE_API_BASE_URL}/developer/wallets", headers=headers, json=payload)
             response.raise_for_status()
             data = response.json()["data"]["wallets"][0]
             return {
@@ -73,7 +73,7 @@ class CircleService:
         }
         
         try:
-            response = requests.post(f"{CIRCLE_API_BASE_URL}/developer/transactions/transfer", headers=headers, json=payload)
+            response = httpx.post(f"{CIRCLE_API_BASE_URL}/developer/transactions/transfer", headers=headers, json=payload)
             response.raise_for_status()
             return response.json()["data"]["txHash"]
         except Exception as e:
@@ -103,7 +103,7 @@ class CircleService:
         }
         
         try:
-            response = requests.post(f"{CIRCLE_API_BASE_URL}/developer/transactions/transfer", headers=headers, json=payload)
+            response = httpx.post(f"{CIRCLE_API_BASE_URL}/developer/transactions/transfer", headers=headers, json=payload)
             response.raise_for_status()
             return response.json()["data"]["txHash"]
         except Exception as e:
