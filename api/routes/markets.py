@@ -42,3 +42,23 @@ async def get_market_detail(market_id: str):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/{market_id}/ai-rationale")
+async def get_ai_rationale(market_id: str):
+    try:
+        data = MarketsService.get_ai_rationale(market_id)
+        if not data:
+            return {
+                "success": False,
+                "data": None,
+                "error": "AI Rationale not found",
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }
+        return {
+            "success": True,
+            "data": data,
+            "error": None,
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

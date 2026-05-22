@@ -36,7 +36,7 @@ def run_market_creation():
     
     if not response_json or "markets" not in response_json:
         print("Agent 1: Failed to get valid response from Claude.")
-        return
+        return []
         
     markets_to_insert = []
     now = datetime.now(timezone.utc).isoformat()
@@ -69,6 +69,7 @@ def run_market_creation():
             print(f"Agent 1: Error inserting market {m['title']}: {e}")
             
     print("Agent 1: Run complete.")
+    return markets_to_insert
 
 if __name__ == "__main__":
     run_market_creation()

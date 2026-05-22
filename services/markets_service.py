@@ -111,3 +111,27 @@ class MarketsService:
             },
             "probability_history": prob_history
         }
+
+    @staticmethod
+    def get_ai_rationale(market_id: str) -> Optional[Dict[str, Any]]:
+        # Fetch the most recent rationale for this market
+        response = supabase.table("ai_rationale").select("*").eq("market_id", market_id).order("generated_at", desc=True).limit(1).execute()
+        if not response.data:
+            return None
+            
+        r = response.data[0]
+        market_resp = supabase.table("markets").select("title").eq("id", market_id).execute()
+        market_title = market_resp.data[0]["title"] if market_resp.data else "Unknown Market"
+        
+        return {
+            "market_id": market_id,
+            "market_title": market_title,
+            "probability_yes": r["probability_yes"],
+            "confidence": r.get("confidence", "medium"),
+            "generated_at": r["generated_at"],
+            "rationale": r["rationale"],
+            "key_factors": r.get("key_factors", []),
+            "risk_factors": r.get("risk_factors", []),
+            "sources": r.get("sources", []),
+            "data_snapshot": r.get("data_snapshot", {})
+        }
