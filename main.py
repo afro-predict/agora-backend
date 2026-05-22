@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 from api.routes import markets
+from scheduler.cron import start_scheduler, shutdown_scheduler
 
 app = FastAPI(title="Agora Backend API", description="African Macro Prediction Markets")
 
@@ -17,6 +18,14 @@ app.add_middleware(
 )
 
 app.include_router(markets.router)
+
+@app.on_event("startup")
+async def startup_event():
+    start_scheduler()
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    shutdown_scheduler()
 
 MOCK_API_DIR = os.path.join(os.path.dirname(__file__), "mock-api")
 
